@@ -67,7 +67,7 @@ body{
     font-weight: bold;
 }
 .navbar #auth-form form input[type='email'], .navbar #auth-form form input[type='password']{
-    background-color: rgba(255, 205, 210, 0.29);
+    background-color: #FFFFFF;
     border: 2px solid #D32F2F  ;
     color: #F44336 ;
     padding: 5px;
@@ -165,5 +165,39 @@ body{
 /*End Footer section style*/
 
 
-/*Start  pr section style*/
-/*End Footer section style*/
+/*Start  auth form section style*/
+
+#section-auth{
+    margin-top: 10rem;
+    color:#212121;
+    font-weight: bold;
+}
+#section-auth fieldset{
+    border: 2px solid #d9534f;
+    margin-bottom: 6.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    line-height: 0;
+}
+#section-auth input[type='email'],#section-auth input[type='password'],#section-auth input[type='text']{
+    padding: 5px;
+    border: 1px solid #d9534f;
+    background-color: rgba(255, 182, 174, 0.09);;
+}
+#section-auth label{
+    margin: 15px;
+}
+#section-auth button{
+    margin-top: 25px;
+}
+#section-auth .try{
+    margin: 1rem;
+}
+#section-auth span{
+    font-weight: bolder;
+}
+#section-auth a{
+    color: #d9534f;
+    margin: 7px;
+}
+/*End  auth form section style*/
