@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block body %}
+    <section id="product-section">
+        <div class="container">
+            <div class="card card-top">
+                <div class="row">
+                    <div class="col-md-5 col-lg-5 col-xl-5">
+                         <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="width: 100%">
+                    </div>
+                    <div class="col-md-7 col-lg-7 col-xl-7">
+                        <div class="detail">
+                            <h3 >Vans</h3>
+                            <hr>
+                            <h5 class="price">Ksh 3000</h5>
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    Shipped from
+                                </div>
+                                 <div class="col-md-9 col-lg-9 col-xl-9">
+                                    Shipped from oversees
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    Color
+                                </div>
+                                 <div class="col-md-9 col-lg-9 col-xl-9">
+                                    Blue
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    Quatity
+                                </div>
+                                 <div class="col-md-9 col-lg-9 col-xl-9">
+                                    5
+                                </div>
+                            </div>
+                        </div>
+                     <button class="btn btn-danger">Add to cart</button>
+                     <button class="btn btn-outline-danger">Buy now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px">
+               <div class="description" style="padding: 10px">
+                   <h3>Description</h3>
+                <p class="card-text">Brand: Sundabests</p>
+                <p class="card-text">Material: Ceramic </p>
+                <p class="card-text">Technique: Handpainted</p>
+                <p class="card-text">Quantity:6 pcs</p>
+                <p class="card-text">Pattern: Fashion women</p>
+                <p class="card-text">Diameter：8cm</p>
+               </div>
+            </div>
+
+             <div class="card" id="top-card">
+                <div class="">
+                    <h6>Products that you might like</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                        <div class="card" id="card-inner">
+                            <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="height: 220px">
+                            <div class="card-body">
+                                <p class="">
+                                   Vans
+                                </p>
+                                <span>Ksh:3000</span>
+                                <span>Add to cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                        <div class="card" id="card-inner">
+                            <img src="{{url_for('static',filename='images/brands/brand5.jpg')}}" alt="" style="height: 220px">
+                            <div class="card-body">
+                                <p class="">
+                                   Vans
+                                </p>
+                                <span>Ksh:3000</span>
+                                <span>Add to cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                        <div class="card" id="card-inner">
+                            <img src="{{url_for('static',filename='images/brands/brand1.jpg')}}" alt="" style="height: 220px">
+                            <div class="card-body">
+                                <p class="">
+                                   Vans
+                                </p>
+                                <span>Ksh:3000</span>
+                                <span>Add to cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-lg-3 col-xl-3">
+                        <div class="card" id="card-inner">
+                            <img src="{{url_for('static',filename='images/brands/brand8.jpg')}}" alt="" style="height: 220px">
+                            <div class="card-body">
+                                <p class="">
+                                   Vans
+                                </p>
+                                <span>Ksh:3000</span>
+                                <span>Add to cart</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px">
+                <div class="reviews container">
+                    <h3 style="text-align: center;padding-top: 10px">Reviews</h3>
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2 col-xl-2">
+                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
+                        </div>
+                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
+                        </div>
+                    </div>
+                    <hr>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+{% endblock body %}

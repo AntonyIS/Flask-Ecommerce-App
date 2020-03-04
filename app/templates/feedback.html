@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block body %}
+    <section id="feedback">
+        <div class="container">
+            <div id="feedback-style">
+                <div class="jumbotron" style="margin-top: 30px">
+                    <h4>Page not found 404</h4>
+                    <p class="lead">This page is still under development</p>
+                    <div class="error">
+                        <p>{{ error }}</p>
+                    </div>
+                    <a href="{{ url_for('index') }}">Go Home</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock body %}

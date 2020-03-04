@@ -33,7 +33,7 @@
         </div>
     </header>
     <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-custom">
-        <a class="navbar-brand" href="#">Sneek collections</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">Sneek collections</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse container"  id="navbarSupportedContent" >
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Phones</a>
@@ -68,10 +68,10 @@
 
 
             <div class="btn-group " id="auth-form">
-                  <a type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a type="button" class="btn btn-outline-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Account
                   </a>
-                  <div class="dropdown-menu dropdown-menu-right" id="auth-form">
+                  <div class="dropdown-menu dropdown-menu-left" id="auth-form">
                       <form action="" class="px-xl-4" style="width: 250px">
                           <h4 style="text-align: center">Login </h4>
                           <hr>
