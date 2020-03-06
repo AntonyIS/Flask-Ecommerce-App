@@ -23,24 +23,7 @@
                            <p>No Products</p>
                        {% endif  %}
                    </div>
-                    <div class="row">
-                           {% if orders %}
-                               {% for order in orders %}
-                                   <div class="col-md-6 col-lg-6 col-xl-6">
-                                        <div class="card" id="card-inner">
-                                            <div class="card-body">
-                                                <span class="">Customer{{ order.user_id}}</span>
-                                                <span class="">Amount: {{ order.amount}}</span>
-                                                <span class="">Quantity: {{ order.qty}}</span>
-                                                 <a href="" class="btn btn-success btn-block">Confirm</a>
-                                            </div>
-                                        </div>
-                                   </div>
-                                {% endfor %}
-                           {% else %}
-                               <p>No Products</p>
-                           {% endif  %}
-                       </div>
+
                 </div>
                 <div class="col-md-4 col-lg-4 col-xl-4 ">
                     <div class="card">
@@ -100,5 +83,35 @@
                 </div>
             </div>
         </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xl-12">
+                <div class="card">
+                     <div class="row">
+                           {% if orders %}
+                               {% for order in orders %}
+                                   <div class="col-md-3 col-lg-3 col-xl-3">
+                                        <div class="card" id="card-inner">
+                                            <div class="card-body">
+                                                <span class="">Customer: {{ order.userame}}</span> <br>
+                                                <span class="">Amount: Ksh {{ order.amount}}</span> <br>
+                                                <span class="">Quantity: {{ order.qty}}</span> <br>
+                                                <span class="">Location: Nairobi CBD</span>
+                                                 <a href="" class="btn btn-success btn-block">Confirm</a>
+                                            </div>
+                                        </div>
+                                   </div>
+                                {% endfor %}
+                           {% else %}
+                               <p>No Products</p>
+                           {% endif  %}
+                       </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-8 col-xl-8">
+
+            </div>
+        </div>
+    </div>
     </section>
 {% endblock body %}

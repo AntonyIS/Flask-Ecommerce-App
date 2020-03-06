@@ -11,11 +11,13 @@ from app import db
 @app.route('/')
 @app.route('/home')
 def index():
+
     form = LoginForm()
     products = Product.query.all()[:4]
     try:
+        user = User.query.get(session['user_id'])
         carts = Cart.query.filter_by(user_id=session['user_id']).all()
-        return render_template('index.html', title='Home page', form=form, products=products, cart_count=len(carts))
+        return render_template('index.html', title='Home page', form=form, products=products, cart_count=len(carts), user=user)
     except KeyError:
         form = LoginForm()
         return render_template('index.html', title='Home page', form=form, products=products)
@@ -73,7 +75,8 @@ def dashboard():
             flash('Congratulations, you {}'.format(form.title.data))
             return redirect(url_for('dashboard'))
         else:
-            return render_template('dashboard.html', form=form, products=products, orders=orders)
+            user = User.query.get(session['user_id'])
+            return render_template('dashboard.html', form=form, products=products, orders=orders, user=user)
     else:
         return render_template('index.html')
 
@@ -103,7 +106,9 @@ def shopping_cart():
         total = 0
         for cart in carts:
             total += cart.price
-        return render_template('shopping_cart.html', title='Home page', cart_count=len(carts),carts=carts, total=total)
+
+        user = User.query.get(session['user_id'])
+        return render_template('shopping_cart.html', title='Home page', cart_count=len(carts),carts=carts, total=total, user=user)
     except KeyError:
         return redirect(url_for('index'))
 
@@ -144,6 +149,16 @@ def checkout():
 @login_required
 def checkedout():
     return render_template('checkout.html')
+
+@app.route('/account/<username>')
+@login_required
+def account(username):
+    try:
+        user = User.query.filter_by(username=username).first()
+        return render_template('account.html', user=user)
+    except:
+        return render_template('index.html')
+
 
 
 @app.route('/logout')

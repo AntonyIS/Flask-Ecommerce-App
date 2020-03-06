@@ -63,6 +63,7 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     userame = db.Column(db.String(64), index=True)
     amount = db.Column(db.Integer)
+    # date
     qty = db.Column(db.Integer, index=True)
 
 
