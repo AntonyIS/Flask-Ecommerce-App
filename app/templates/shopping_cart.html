@@ -12,14 +12,15 @@
                         <div class="card" style="margin: 5px">
                            <div class="row">
                                <div class="col-md-3 col-lg-3 col-xl-3">
-                                   <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="height: 70px">
+                                   <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" class="img-fluid"  alt="">
                                </div>
-                               <div class="col-md-6 col-lg-6 col-xl-6">
+                               <div class="col-md-6 col-lg-6 col-xl-6 content">
                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur consequatur,
                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur consequatur,</p>
                                </div>
-                               <div class="col-md-3 col-lg-3 col-xl-3">
+                               <div class="col-md-3 col-lg-3 col-xl-3 links">
                                    <a href="{{ url_for('remove', cart_id=cart.id) }}">Remove</a> <br>
+                                   <a href="">Share</a><br>
                                    <a href="">Save later</a>
                                </div>
                            </div>
@@ -35,7 +36,7 @@
                         <div class="card-body">
                               <h5 class="">Ksh {{total}}</h5>
                               <h6>Quantity: {{ cart_count }}</h6>
-                            <a href="{{ url_for('checkout') }}" class="btn btn-danger btn-block">Checkout</a>
+                            <a href="{{ url_for('checkout') }}" class="btn btn-danger btn-block" >Order</a>
                         </div>
                     </div>
                 </div>

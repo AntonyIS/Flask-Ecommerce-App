@@ -3,7 +3,7 @@ from app.forms import LoginForm, RegistrationForm, ProductForm
 from app import app
 from flask_login import current_user, login_user,logout_user, login_required
 
-from app.models import User,Product,Cart
+from app.models import User,Product,Cart,Order
 from app import db
 
 
@@ -64,6 +64,7 @@ def signup():
 def dashboard():
     if session['admin'] == True :
         products = Product.query.all()
+        orders = Order.query.all()
         form = ProductForm()
         if request.method == 'POST':
             product = Product(title=form.title.data,price=form.price.data, description=form.description.data,size=form.size.data,category=form.category.data)
@@ -72,7 +73,7 @@ def dashboard():
             flash('Congratulations, you {}'.format(form.title.data))
             return redirect(url_for('dashboard'))
         else:
-            return render_template('dashboard.html', form=form, products=products)
+            return render_template('dashboard.html', form=form, products=products, orders=orders)
     else:
         return render_template('index.html')
 
@@ -120,16 +121,29 @@ def remove(cart_id):
 def checkout():
     try:
         carts = Cart.query.filter_by(user_id=session['user_id']).all()
-        cart_count = len(carts)
-        print("CART", cart_count)
+        user = User.query.get(session['user_id'])
+        total = 0
+        cart_count =len(carts)
+        for cart in carts:
+            total += cart.price
+        order = Order(user_id=session['user_id'],amount=total,qty=cart_count, userame=user.username)
+        db.session.add(order)
+        db.session.commit()
         count = 0
         while count < cart_count:
+
             db.session.delete(carts[count])
             db.session.commit()
             count += 1
-        return redirect(url_for('index'))
+        return redirect(url_for('checkedout'))
     except KeyError:
         return redirect(url_for('index'))
+
+
+@app.route('/checked-out')
+@login_required
+def checkedout():
+    return render_template('checkout.html')
 
 
 @app.route('/logout')

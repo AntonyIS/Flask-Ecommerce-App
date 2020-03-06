@@ -9,6 +9,8 @@
 
         <!--css links-->
         <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+
+        <script src="{{ url_for('static',filename='js/main.js') }}"></script>
         <title>{% block title %}{{ title }}{% endblock title %}</title>
 
     </head>
@@ -37,7 +39,7 @@
     </header>
     <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-custom">
         <a class="navbar-brand" href="{{ url_for('index') }}">Sneek collections</a>
-         {% if cart_count %}<span class="badge badge-warning">{{ cart_count }}</span>{% endif %}
+
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -48,9 +50,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Phones</a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="#">Phones</a>#}
+{#                </li>#}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Bags</a>
                 </li>
@@ -60,23 +62,26 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Dresses</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Electronics</a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="#">Electronics</a>#}
+{#                </li>#}
                 {% if session['admin']== True %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
                 {% endif%}
                 {% if cart_count %}
-                   <a href="{{ url_for('shopping_cart')  }}" class="btn btn-warning">Shopping cart</a>
+                   <a href="{{ url_for('shopping_cart')  }}" class="btn btn-warning" style="padding: 5px;margin: 5px">Shopping Cart<span class="badge badge-warning" style="margin:3px ; border: 1px solid red">{{ cart_count }}</span></a>
+
                 {% endif %}
             </ul>
 
 
             <form class="form-inline " style="text-align: center;">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <div class="input-group">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </div>
             </form>
 
              {% if current_user.is_anonymous %}

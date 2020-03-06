@@ -34,13 +34,14 @@
                     {% if products %}
                            {% for product in products %}
                                <div class="col-md-3 col-lg-3 col-xl-3">
-                                   <a href="{{ url_for('product_details', product_id=product.id) }}">
+                                   <a href="{{ url_for('product_details', product_id=product.id) }}" >
                                       <div class="card" id="card-inner">
-                                            <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="height: 150px">
-                                            <div class="card-body">
+                                            <img src="{{url_for('static',filename='images/brands/brand3.jpg')}}"  class="img-fluid" alt="" style="height: 210px">
+                                            <div class="card-body" style="text-align: center">
                                                 <p class="">{{ product.title }}</p>
-                                                <span>Ksh:{{product.price}}</span>
-                                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-danger">Add to cart</a>
+                                                <span style="padding: 3px">Ksh:{{product.price}}</span>
+                                                <br>
+                                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-danger btn-block">Add to cart</a>
 
                                             </div>
                                       </div>
@@ -65,7 +66,7 @@
                                    Vans
                                 </p>
                                 <span>Ksh:3000</span>
-                                <span>Add to cart</span>
+                                <button class="btn btn-danger btn-block">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -77,7 +78,7 @@
                                    Vans
                                 </p>
                                 <span>Ksh:3000</span>
-                                <span>Add to cart</span>
+                               <button class="btn btn-danger btn-block">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -89,7 +90,7 @@
                                    Vans
                                 </p>
                                 <span>Ksh:3000</span>
-                                <span>Add to cart</span>
+                                <button class="btn btn-danger btn-block">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
                                    Vans
                                 </p>
                                 <span>Ksh:3000</span>
-                                <span>Add to cart</span>
+                                <button class="btn btn-danger btn-block">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -122,7 +123,7 @@
                                    Vans
                                 </p>
                                 <span>Ksh:3000</span>
-                                <span>Add to cart</span>
+                                <button class="btn btn-danger btn-block">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -134,7 +135,7 @@
                                    Vans
                                 </p>
                                 <span>Ksh:3000</span>
-                                <span>Add to cart</span>
+                                <button class="btn btn-danger btn-block">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -146,7 +147,7 @@
                                    Vans
                                 </p>
                                 <span>Ksh:3000</span>
-                                <span>Add to cart</span>
+                                <button class="btn btn-danger btn-block">Add to cart</button>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@ body{
 
 .navbar-brand {
   padding: 0 15px;
-  height: 90px;
+  height: 65px;
   line-height: 80px;
 }
 
@@ -237,3 +237,49 @@ body{
 
 }
 /*End  dashbaord section style*/
+/*Start  checkedout section style*/
+
+#checkedout{
+    background-color: rgba(244, 67, 54, 0.51);
+    padding: 0;
+    margin: 0;
+}
+#checkedout .jumbotron{
+    margin-top: 200px;
+    text-align: center;
+    color: #bf4946;
+    background-color: rgba(255, 205, 210, 0.27);
+}
+#checkedout .card{
+    text-align: center;
+    color: #bf4946;
+    background-color: rgba(255, 205, 210, 0.27);
+}
+
+/*End  checkedout section style*/
+/*Start  shoppingcart-section section style*/
+#shoppingcart-section{
+    margin: 5px;
+
+}
+
+#shoppingcart-section .card{
+    margin: 5px;
+    padding: 5px;
+
+}
+#shoppingcart-section img{
+    border: 1px solid red;
+    margin: 10px;
+    border-radius: 50%;
+
+}
+#shoppingcart-section .content, .links{
+    margin-top: 11px;
+}
+#shoppingcart-section  .links{
+    text-align: right;
+    padding-left: 5px;
+}
+
+/*End  shoppingcart-section section style*/

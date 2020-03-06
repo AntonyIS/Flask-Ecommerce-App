@@ -47,7 +47,8 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(200), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    # product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+
+
 
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -56,6 +57,15 @@ class Cart(db.Model):
     title = db.Column(db.String(64), index=True)
     price = db.Column(db.Integer, index=True)
 
-    # product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    userame = db.Column(db.String(64), index=True)
+    amount = db.Column(db.Integer)
+    qty = db.Column(db.Integer, index=True)
+
+
+
 
 
