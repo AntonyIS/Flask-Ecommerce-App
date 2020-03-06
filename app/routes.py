@@ -1,9 +1,9 @@
-from flask import render_template, url_for, flash, redirect,session
-from app.forms import LoginForm, RegistrationForm
+from flask import render_template, url_for, flash, redirect,session, request
+from app.forms import LoginForm, RegistrationForm, ProductForm
 from app import app
-from flask_login import current_user, login_user,logout_user
+from flask_login import current_user, login_user,logout_user, login_required
 
-from app.models import User
+from app.models import User,Product,Cart
 from app import db
 
 
@@ -11,15 +11,15 @@ from app import db
 @app.route('/')
 @app.route('/home')
 def index():
-
     form = LoginForm()
-    return render_template('index.html', title='Home page', form=form)
+    products = Product.query.all()[:4]
+    try:
+        carts = Cart.query.filter_by(user_id=session['user_id']).all()
+        return render_template('index.html', title='Home page', form=form, products=products, cart_count=len(carts))
+    except KeyError:
+        form = LoginForm()
+        return render_template('index.html', title='Home page', form=form, products=products)
 
-
-@app.route('/mali/<int:mali_id>')
-def product_detail(mali_id):
-    form = LoginForm()
-    return render_template('product_detail.html', title='Home page', form = form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -33,9 +33,13 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('index'))
 
-        if user.email =='den@gmail.com':
+        if user.email =='a@gmail.com':
             session['admin'] = True
+            session['user_id'] = user.id
+
             login_user(user, remember=form.remember_me.data)
+        session['user_id'] = user.id
+
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
@@ -43,12 +47,10 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
@@ -57,15 +59,83 @@ def signup():
         return redirect(url_for('index'))
     return render_template('signup.html', title='Register', form=form)
 
-@app.route('/dashboard')
-def dashboard():
-    if session['admin'] == True:
 
-        return render_template('dashboard.html')
+@app.route('/dashboard', methods=['GET','POST'])
+def dashboard():
+    if session['admin'] == True :
+        products = Product.query.all()
+        form = ProductForm()
+        if request.method == 'POST':
+            product = Product(title=form.title.data,price=form.price.data, description=form.description.data,size=form.size.data,category=form.category.data)
+            db.session.add(product)
+            db.session.commit()
+            flash('Congratulations, you {}'.format(form.title.data))
+            return redirect(url_for('dashboard'))
+        else:
+            return render_template('dashboard.html', form=form, products=products)
+    else:
+        return render_template('index.html')
+
+
+@app.route('/product/<int:product_id>')
+def product_details(product_id):
+    product = Product.query.get(product_id)
+    form = LoginForm()
+    return render_template('product_detail.html', product=product, form=form)
+
+
+@app.route('/add/<int:product_id>')
+@login_required
+def add_to_cart(product_id):
+    product = Product.query.get(product_id)
+    cart = Cart(product_id=product_id, user_id=session['user_id'], title=product.title, price=product.price)
+
+    db.session.add(cart)
+    db.session.commit()
+    return redirect(url_for('index'))
+
+
+@app.route('/shopping-cart')
+def shopping_cart():
+    try:
+        carts = Cart.query.filter_by(user_id=session['user_id']).all()
+        total = 0
+        for cart in carts:
+            total += cart.price
+        return render_template('shopping_cart.html', title='Home page', cart_count=len(carts),carts=carts, total=total)
+    except KeyError:
+        return redirect(url_for('index'))
+
+
+@app.route('/remove/<int:cart_id>')
+def remove(cart_id):
+    cart = Cart.query.get(cart_id)
+    db.session.delete(cart)
+    db.session.commit()
+    return redirect(url_for('shopping_cart'))
+
+
+@app.route('/checkout')
+@login_required
+def checkout():
+    try:
+        carts = Cart.query.filter_by(user_id=session['user_id']).all()
+        cart_count = len(carts)
+        print("CART", cart_count)
+        count = 0
+        while count < cart_count:
+            db.session.delete(carts[count])
+            db.session.commit()
+            count += 1
+        return redirect(url_for('index'))
+    except KeyError:
+        return redirect(url_for('index'))
+
 
 @app.route('/logout')
 def logout():
     session.pop('admin', None)
+    session.pop('user_id', None)
     logout_user()
     return redirect(url_for('index'))
 

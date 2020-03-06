@@ -200,4 +200,40 @@ body{
     color: #d9534f;
     margin: 7px;
 }
-/*End  auth form section style*/
+/*Start  dashbaord style*/
+#section-dashboard {
+    background-color: rgba(255, 205, 210, 0.27);
+}
+#section-dashboard .card{
+    margin-top: 5px;
+    background-color: rgba(255, 205, 210, 0.27);
+    border: transparent;
+
+}
+#section-dashboard form{
+    margin-top: 10px;
+    background-color: rgba(255, 205, 210, 0.27);
+}
+#section-dashboard form input[type='text'],input[type='number'],input[type='textarea']{
+    border-radius: 0;
+    border:2px solid #d9534f;
+    color:#d9534f;
+    background-color: rgba(217, 83, 79, 0.39);
+}
+#section-dashboard fieldset{
+    padding: 10px;
+    border-radius: 0;
+    border:2px solid #d9534f;
+    margin-top: 0;
+}
+#section-dashboard fieldset hr{
+    border-radius: 0;
+    border:1px solid #d9534f;
+}
+#section-dashboard fieldset button{
+    border:1px solid #d9534f;
+    background-color: #d9534f;
+    border-radius: 0;
+
+}
+/*End  dashbaord section style*/

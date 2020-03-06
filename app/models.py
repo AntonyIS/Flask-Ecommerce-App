@@ -30,13 +30,32 @@ class User(UserMixin, db.Model):
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), index=True)
+    price = db.Column(db.Integer, index=True)
     description = db.Column(db.String(200))
-    image = db.Column(db.String(64), index=True, unique=True)
-    size = db.Column(db.Integer, index=True, unique=True)
-    reviews = db.Column(db.String(64), index=True, unique=True)
+    image = db.Column(db.String(64), index=True, unique=False)
+    size = db.Column(db.Integer, index=True, unique=False)
+    reviews = db.Column(db.String(64), index=True, unique=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     category = db.Column(db.String(64), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<Post {}>'.format(self.body)
+        return '<Product {}>'.format(self.title)
+
+
+class Review(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    comment = db.Column(db.String(200), index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+    title = db.Column(db.String(64), index=True)
+    price = db.Column(db.Integer, index=True)
+
+    # product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
+
+

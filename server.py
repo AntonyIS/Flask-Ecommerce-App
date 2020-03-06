@@ -1,5 +1,4 @@
 from app import app
-from flask_session import Session
-sess = Session()
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=2000)

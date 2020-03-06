@@ -2,7 +2,7 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block body %}
-    <section id="carousel-section">
+    <section id="carousel-section" style="margin-top: 5px">
         <div class="container">
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                   <div class="carousel-inner">
@@ -31,55 +31,25 @@
                     <h6>Latest products</h6>
                 </div>
                 <div class="row">
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                        <div class="card" id="card-inner">
-                            <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="height: 220px">
-                            <div class="card-body">
-                                <p class="">
-                                   Vans
-                                </p>
-                                <span>Ksh:3000</span>
-                                <span>Add to cart</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                        <div class="card" id="card-inner">
-                            <img src="{{url_for('static',filename='images/brands/brand5.jpg')}}" alt="" style="height: 220px">
-                            <div class="card-body">
-                                <p class="">
-                                   Vans
-                                </p>
-                                <span>Ksh:3000</span>
-                                <span>Add to cart</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                        <div class="card" id="card-inner">
-                            <img src="{{url_for('static',filename='images/brands/brand1.jpg')}}" alt="" style="height: 220px">
-                            <div class="card-body">
-                                <p class="">
-                                   Vans
-                                </p>
-                                <span>Ksh:3000</span>
-                                <span>Add to cart</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-lg-3 col-xl-3">
-                        <div class="card" id="card-inner">
-                            <img src="{{url_for('static',filename='images/brands/brand8.jpg')}}" alt="" style="height: 220px">
-                            <div class="card-body">
-                                <p class="">
-                                   Vans
-                                </p>
-                                <span>Ksh:3000</span>
-                                <span>Add to cart</span>
-                            </div>
-                        </div>
-                    </div>
+                    {% if products %}
+                           {% for product in products %}
+                               <div class="col-md-3 col-lg-3 col-xl-3">
+                                   <a href="{{ url_for('product_details', product_id=product.id) }}">
+                                      <div class="card" id="card-inner">
+                                            <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="height: 150px">
+                                            <div class="card-body">
+                                                <p class="">{{ product.title }}</p>
+                                                <span>Ksh:{{product.price}}</span>
+                                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-danger">Add to cart</a>
 
+                                            </div>
+                                      </div>
+                                   </a>
+                               </div>
+                            {% endfor %}
+                       {% else %}
+                           <p>No Products</p>
+                       {% endif  %}
                 </div>
             </div>
             <div class="card" id="top-card">

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, TextAreaField, FileField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
@@ -28,3 +28,14 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+
+class ProductForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    size = IntegerField('Size', validators=[DataRequired()])
+    price = IntegerField('Price', validators=[DataRequired()])
+    category = StringField('Category', validators=[DataRequired()])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    image = FileField()
+    user_id = StringField('user_id', validators=[DataRequired()])
+    submit = SubmitField('Add Product')

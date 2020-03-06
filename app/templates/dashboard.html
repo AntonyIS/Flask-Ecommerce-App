@@ -2,7 +2,85 @@
 {% block title %}{{ title }}{% endblock title %}
 
 {% block body %}
-    <section id="carousel-section">
+    <section id="section-dashboard">
+        <div class="section-add-product container" >
+            <div class="row">
+                <div class="col-md-8 col-lg-8 col-xl-8" style="height: 40vh">
+                   <div class="row">
+                       {% if products %}
+                           {% for product in products %}
+                               <div class="col-md-3 col-lg-3 col-xl-3">
+                                    <div class="card" id="card-inner">
+                                        <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="height: 150px">
+                                        <div class="card-body">
+                                            <p class="">{{ product.title }}</p>
+                                            <span>Ksh:{{product.price}}</span>
+                                        </div>
+                                    </div>
+                               </div>
+                            {% endfor %}
+                       {% else %}
+                           <p>No Products</p>
+                       {% endif  %}
+                   </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-xl-4 ">
+                    <div class="card">
+                        <form action="{{ url_for('dashboard') }}" method="post" enctype="multipart/form-data">
+                            <fieldset>
+                                {{ form.hidden_tag() }}
+                                  <h4 style="text-align: center">Add Product</h4>
+                                          <hr>
+                                <div class="form-group">
+                                        <label for="">{{ form.title.label }}</label>
+                                        {{ form.title(size=32, placeholder="Product title", class="form-control",type="text") }}
+                                        {% for error in form.title.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                  </div>
+                                <div class="form-group">
+                                        <label for="">{{ form.price.label }}</label>
+                                        {{ form.price(size=32, placeholder="Product price", class="form-control",type="text") }}
+                                        {% for error in form.price.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                  </div>
+                                  <div class="form-group">
+                                        <label for="">{{ form.size.label }}</label>
+                                        {{ form.size(size=32, placeholder="Size of product", class="form-control",type="number") }}
+                                        {% for error in form.size.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                  </div>
 
+                                    <div class="form-group">
+                                        <label for="">{{ form.category.label }}</label>
+                                        {{ form.category(size=32, placeholder="Category", class="form-control",type="text") }}
+                                        {% for error in form.category.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="">
+{#                                        <label for="exampleDropdownFormEmail2">{{ form.image.label }}</label>#}
+                                        {{ form.image(size=32,type="file",id="") }}
+                                        {% for error in form.image.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">{{ form.description.label }}</label>
+                                        {{ form.description(size=32, placeholder="Description", class="form-control",type="textarea",id="") }}
+                                        {% for error in form.description.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </div>
+
+                                  <button type="submit" class="btn btn-primary btn-block">Add Product</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock body %}
