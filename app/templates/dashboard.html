@@ -11,10 +11,12 @@
                            {% for product in products %}
                                <div class="col-md-3 col-lg-3 col-xl-3">
                                     <div class="card" id="card-inner">
-                                        <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="height: 150px">
+                                        <img src="{{product.image}}" alt="" style="height: 150px">
                                         <div class="card-body">
                                             <p class="">{{ product.title }}</p>
                                             <span>Ksh:{{product.price}}</span>
+                                            <a href="{{ url_for('delete', product_id=product.id) }}" class="btn btn-danger btn-block">Delete</a>
+
                                         </div>
                                     </div>
                                </div>
@@ -62,7 +64,7 @@
                                         {% endfor %}
                                     </div>
                                     <div class="">
-{#                                        <label for="exampleDropdownFormEmail2">{{ form.image.label }}</label>#}
+
                                         {{ form.image(size=32,type="file",id="") }}
                                         {% for error in form.image.errors %}
                                         <span style="color: red;">[{{ error }}]</span>

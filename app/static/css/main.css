@@ -89,6 +89,10 @@ body{
     padding: 10px;
     margin-top: 20px;
 }
+#top-card a{
+   text-decoration: none;
+
+}
 #card-inner{
     border-radius: 0;
 }
@@ -97,18 +101,16 @@ body{
 
 }
 #card-inner .card-body p{
-    /*background-color: #F44336;*/
+     color: #F44336;
     font-weight: bold;
-    color:  #D32F2F;
-    padding: 0;
-    border-radius: 5px;
-    border: 1px solid #D32F2F;
-    text-align: center;
-
+    font-size: 17px;
+    margin: 0;
 }
-#card-inner .card-body p:hover{
-   background-color: #F44336;
-    color: #FFFFFF;
+#card-inner .card-body .fa-shopping-cart{
+   color: #F44336;
+    font-size: 25px;
+    margin-left: 1.2rem;
+
 }
 
 /*start section detail product*/
@@ -170,11 +172,11 @@ body{
 #section-auth{
     margin-top: 10rem;
     color:#212121;
-    font-weight: bold;
+    font-weight: initial;
 }
 #section-auth fieldset{
     border: 2px solid #d9534f;
-    margin-bottom: 6.5rem;
+    margin-bottom: 6px;
     padding: 1.5rem;
     text-align: center;
     line-height: 0;
@@ -198,7 +200,21 @@ body{
 }
 #section-auth a{
     color: #d9534f;
-    margin: 7px;
+    padding: 7px;
+}
+#section-auth fieldset hr{
+     border-radius: 0;
+    border:1px solid #d9534f;
+
+}
+#section-auth .card-bottom{
+    padding: 10px;
+    border: 2px solid  #d9534f;
+    background-color: rgba(255, 205, 210, 0.27);
+}
+#section-auth .alert{
+    padding: 0;
+    margin-top: 15px;
 }
 /*Start  dashbaord style*/
 #section-dashboard {
@@ -270,12 +286,13 @@ body{
 }
 #shoppingcart-section img{
     border: 1px solid red;
-    margin: 10px;
+    margin: 5px;
     border-radius: 50%;
+    height: 40px;
 
 }
 #shoppingcart-section .content, .links{
-    margin-top: 11px;
+    margin-top: 0;
 }
 #shoppingcart-section  .links{
     text-align: right;
@@ -284,5 +301,8 @@ body{
 
 /*End  shoppingcart-section section style*/
 
-/*Start Acount styling*/
-/*Start Acount styling*/
+/*Start order section styling*/
+#order-section{
+    padding-top: 200px;
+}
+/*Start order section styling*/

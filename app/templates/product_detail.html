@@ -7,16 +7,16 @@
             <div class="card card-top">
                 <div class="row">
                     <div class="col-md-5 col-lg-5 col-xl-5">
-                         <img src="{{url_for('static',filename='images/brands/brand4.jpg')}}" alt="" style="width: 100%">
+                         <img src="/{{product.image}}" alt="" style="width: 100%">
                     </div>
                     <div class="col-md-7 col-lg-7 col-xl-7">
                         <div class="detail">
                             <h3 >{{product.title}}</h3>
                             <hr>
-                            <h5 class="price">Ksh 3000</h5>
+                            <h5 class="price">Ksh {{product.price}}</h5>
                             <div class="row">
                                 <div class="col-md-3 col-lg-3 col-xl-3">
-                                    Shipped from
+
                                 </div>
                                  <div class="col-md-9 col-lg-9 col-xl-9">
                                     Shipped from oversees
@@ -48,12 +48,7 @@
             <div class="card" style="margin-top: 20px">
                <div class="description" style="padding: 10px">
                    <h3>Description</h3>
-                <p class="card-text">Brand: Sundabests</p>
-                <p class="card-text">Material: Ceramic </p>
-                <p class="card-text">Technique: Handpainted</p>
-                <p class="card-text">Quantity:6 pcs</p>
-                <p class="card-text">Pattern: Fashion women</p>
-                <p class="card-text">Diameter：8cm</p>
+                {{product.description}}
                </div>
             </div>
 

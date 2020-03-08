@@ -1,0 +1,65 @@
+{% extends 'base2.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block contentauth %}
+<section id="section-auth">
+    <div class="container">
+        <div class="row">
+            <div class="col col-md-3"></div>
+            <div class="col col-md-6">
+
+                <form action="{{ url_for('login') }}" method="post">
+                <div style="text-align: center;font-size: 30px">
+                    <a href="{{ url_for('index') }}" style="text-align: center">La Angel</a>
+                </div>
+                   <fieldset>
+                        {{ form.hidden_tag() }}
+                          <h4 style="text-align: center">Login here</h4>
+                          <hr>
+                           {% if error %}
+                                <div class="alert alert-danger">{{ error }}</div>
+                            {% endif %}
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                              {% if messages %}
+                                <div>
+                                     <ul class=flashes, style="list-style-type: none">
+                                    {% for category, message in messages %}
+                                      <li class="{{ category }}" style="list-style: none;padding: 7px">{{ message }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                          {% endif %}
+                        {% endwith %}
+
+                          <div class="form-group">
+                                <label for="exampleDropdownFormEmail2">{{ form.email.label }}</label>
+                                {{ form.email(size=32, placeholder="email@example.com", class="form-control",type="email",id="exampleDropdownFormEmail2") }}
+                                {% for error in form.email.errors %}
+                                 <span class="alert alert-danger">[{{ error }}]</span>
+                                {% endfor %}
+                          </div>
+
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail2">{{ form.password.label }}</label>
+                                {{ form.password(size=32, placeholder="Password", class="form-control",type="password",id="") }}
+                                {% for error in form.password.errors %}
+                                <span class="alert alert-danger">[{{ error }}]</span>
+                                {% endfor %}
+                            </div>
+
+
+                          <button type="submit" class="btn btn-danger btn-block">Login </button>
+                       <br>
+                   </fieldset>
+                </form>
+                 <div class="card">
+                    <div class="card-bottom">
+                        <span>You are new here?<a href="{{ url_for('signup') }}">Create account...</a></span>
+                    </div>
+                 </div>
+            </div>
+
+            <div class="col col-md-3"></div>
+        </div>
+    </div>
+</section>
+{% endblock contentauth %}

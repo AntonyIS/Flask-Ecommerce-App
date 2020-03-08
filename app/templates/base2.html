@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!--bootstrap css links-->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+
+        <!--css links-->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+        <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+    </head>
+    <body id="checkedout">
+        <div class="container">
+           {% block contentauth %}
+           {% endblock contentauth %}
+        </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+{% extends 'base2.html' %}
+{% block title %}{{ title }}{% endblock title %}
+{% block contentauth %}
+    <section id="order-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 col-lx-3"></div>
+            <div class="col-md-6 col-lg-6 col-lx-6">
+                <div class="card">
+                    <img src="" alt="">
+                    <div class="card-body">
+                        <h3>Dear {{ user.username }}</h3>
+                    </div>
+                </div>
+                <div class="card" >
+                    <div class="card-body">
+                        <div class="row">
+                        {% if carts %}
+                            {% for cart in carts %}
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                     <img src="{{cart.image}}" class="img-circle img-fluid" alt="">
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    {{ cart.title }}
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                    {{ cart.price}}
+                                </div>
+
+                            {% endfor  %}
+                            <hr>
+                        {% else%}
+                            <p>No cart</p>
+                        {% endif%}
+                        </div>
+                    </div>
+
+                </div>
+            <div class="card">
+                <h1>Total: Ksh {{ total }}</h1>
+            </div>
+                <a href="{{ url_for('index') }}">Continue shopping</a>
+            </div>
+            <div class="col-md-3 col-lg-3 col-lx-3"></div>
+        </div>
+    </div>
+    </section>
+{% endblock contentauth %}

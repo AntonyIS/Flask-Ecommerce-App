@@ -26,7 +26,7 @@
                   </a>
             </div>
             <!--List products-->
-            <div class="card" id="top-card">
+            <div class="card container-fluid" id="top-card">
                 <div class="">
                     <h6>Latest products</h6>
                 </div>
@@ -36,20 +36,23 @@
                                <div class="col-md-3 col-lg-3 col-xl-3">
                                    <a href="{{ url_for('product_details', product_id=product.id) }}" >
                                       <div class="card" id="card-inner">
-                                            <img src="{{url_for('static',filename='images/brands/brand3.jpg')}}"  class="img-fluid" alt="" style="height: 210px">
+                                            <img src="{{product.image}}" alt="" class="img-fluid" style="height: 150px;width: 100%">
                                             <div class="card-body" style="text-align: center">
-                                                <p class="">{{ product.title }}</p>
-                                                <span style="padding: 3px">Ksh:{{product.price}}</span>
-                                                <br>
-                                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-danger btn-block">Add to cart</a>
+                                                <p class="">{{ product.title }} </p>
+                                                Ksh:{{product.price}}
+                                                <a href="{{ url_for('add_to_cart', product_id=product.id) }}">
+                                                    <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                                                </a>
 
                                             </div>
                                       </div>
                                    </a>
                                </div>
                             {% endfor %}
-                       {% else %}
+                       {% else %} 
+                           <div  style="margin-right: 50px;color: red">
                            <p>No Products</p>
+                           </div>
                        {% endif  %}
                 </div>
             </div>

@@ -6,9 +6,12 @@
 
         <!--bootstrap css links-->
         <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!--css links-->
         <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/fontawesome.min.css') }}">
 
         <script src="{{ url_for('static',filename='js/main.js') }}"></script>
         <title>{% block title %}{{ title }}{% endblock title %}</title>
@@ -38,7 +41,7 @@
         </div>
     </header>
     <nav class="navbar navbar-expand-lg navbar-fixed-top navbar-custom">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Sneek collections</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">La Angel</a>
 
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,16 +73,19 @@
                         <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
                 {% endif%}
-                {% if cart_count %}
-                   <a href="{{ url_for('shopping_cart')  }}" class="btn btn-warning" style="padding: 5px;margin: 5px">Shopping Cart<span class="badge badge-warning" style="margin:3px ; border: 1px solid red">{{ cart_count }}</span></a>
 
-                {% endif %}
             </ul>
         {% if current_user.is_authenticated %}
           <ul class="navbar-nav ml-auto">
-               <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('account',username=user.username) }}">Account</a>
+               <li class="nav-item" style="margin-right: 10px">
+                    <a class="nav-link" href="{{ url_for('account',username=user.username) }}">
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        {{user.username}}
+                    </a>
                </li>
+          {% if cart_count %}
+                   <a href="{{ url_for('shopping_cart')  }}" class=" bg-warning" style="padding: 5px;margin: 5px"> <span><i class="fa fa-shopping-cart bg-warning" aria-hidden="true"></i></span><span class="badge badge-warning" style="margin:3px ; ">{{ cart_count }}</span></a>
+                {% endif %}
           </ul>
         {% endif %}
             <form class="form-inline " style="text-align: center;">
@@ -92,48 +98,22 @@
 
              {% if current_user.is_anonymous %}
             <div class="btn-group " id="auth-form">
-                  <a type="button" class="btn btn-outline-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Account
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-left" id="auth-form">
-                      <form action="{{ url_for('login') }}" class="px-xl-4" style="width: 250px" method="post">
-                          {{ form.hidden_tag() }}
-                          <h4 style="text-align: center">Login </h4>
-                          <hr>
-                          <div class="form-group">
-                                <label for="exampleDropdownFormEmail2">{{ form.email.label }}</label>
-                                {{ form.email(size=32, placeholder="email@example.com", class="form-control",type="email",id="exampleDropdownFormEmail2") }}
-                                {% for error in form.email.errors %}
-                                <span style="color: red;">[{{ error }}]</span>
-                                {% endfor %}
-                          </div>
+                  <div class="dropdown show">
+                      <a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                      </a>
 
-                            <div class="form-group">
-                                <label for="exampleDropdownFormEmail2">{{ form.password.label }}</label>
-                                {{ form.password(size=32, placeholder="password", class="form-control",type="password",id="") }}
-                                {% for error in form.password.errors %}
-                                <span style="color: red;">[{{ error }}]</span>
-                                {% endfor %}
-                            </div>
-                          <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                            <label class="form-check-label" for="dropdownCheck2">
-                              Remember me
-                            </label>
-                          </div>
-                          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-                          <div style="text-align: center">
-                              or <br>
-                          <a href="{{ url_for('signup') }}" style="color: black">Create an Account</a>
-                          </div>
-                      </form>
-
-                  </div>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item text-danger" href="{{ url_for('login') }}">Login</a>
+                        <a class="dropdown-item text-danger" href="{{ url_for('signup') }}">Signup</a>
+                      </div>
+                    </div>
                 </div>
         </div>
          {% else %}
-            <a href="{{ url_for('logout')  }}" class="btn btn-danger">Logout</a>
+            <a href="{{ url_for('logout')  }}" class="btn btn-danger" style="margin-left: 5px">Logout</a>
         {% endif %}
+
 
     </nav>
     <!--End navbar section-->
