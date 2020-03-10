@@ -41,6 +41,10 @@
                         </div>
                      <a href="{{ url_for('add_to_cart', product_id=product.id) }}" class="btn btn-danger">Add to cart</a>
                      <button class="btn btn-outline-danger">Buy now</button>
+                     {% if session['admin'] %}
+                         <button class="btn btn-outline-danger">Delete</button>
+                         <button class="btn btn-outline-info">Update</button>
+                        {% endif %}
                     </div>
                 </div>
             </div>

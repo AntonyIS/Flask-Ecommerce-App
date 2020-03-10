@@ -3,25 +3,47 @@
 {% block body %}
 <section id="section-account">
     <div class="container">
-        <div class="row account">
-            <div class="col-md-4 col-lg-4 col-xl-4">
-                <div class="card">
-                    <div id="mySidenav" class="sidenav">
-                          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                          <a href="#">About</a>
-                          <a href="#">Services</a>
-                          <a href="#">Clients</a>
-                          <a href="#">Contact</a>
+        <form action="account_handler.php" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xl-4">
+                    <div class="card">
+                        <img src="{{ url_for('static',filename='images/brands/avater.png') }}" alt="" class="img-fluid">
+                    </div>
+                    <div class="card" style="margin-top: 10px">
+                       <div class="card-body">
+                           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit
+                               . Impedit, incidunt minus nobis obcaecati veniam vero.
+                           </p>
+                           <button class="btn btn-info btn-block" name="btn_update">Update</button>
+                       </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-8 col-xl-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <fieldset>
+                                <h3>Hi {{ user.username }}</h3>
+                                <div class="form-group">
+                                    <label for="">Username</label>
+                                    <input type="text" name="username" value="{{ user.username }}" class="form-control">
+                                    <input type="number" name="id" hidden value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" name="email" value="{{ user.email }}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Bio</label>
+                                    <textarea name="bio" class="form-control" >
+
+                                    </textarea>
+                                </div>
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 col-lg-8 col-xl-8">
-                <div class="card">
-
-
-                </div>
-            </div>
-        </div>
+        </form>
     </div>
 </section>
 {% endblock body %}
