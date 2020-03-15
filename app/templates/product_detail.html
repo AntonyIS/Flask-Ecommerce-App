@@ -114,42 +114,59 @@
             <div class="card" style="margin-top: 20px">
                 <div class="reviews container">
                     <h3 style="text-align: center;padding-top: 10px">Reviews</h3>
-                    <div class="row">
-                        <div class="col-md-2 col-lg-2 col-xl-2">
-                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-2 col-lg-2 col-xl-2">
-                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-2 col-lg-2 col-xl-2">
-                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-2 col-lg-2 col-xl-2">
-                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">
-                        </div>
-                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>
-                        </div>
-                    </div>
-                    <hr>
+                    <script  type="text/javascript">
+                        $(document).ready(function(){
+                          var socket = io.connect('http://127.0.0.1:2000/product/1');
+
+                          socket.on('connect', function () {
+                            socket.send('User has connected!');
+                          });
+
+                          socket.on('message', function (msg) {
+                            $("#messages").append('<li>'+ msg+ '</li>');
+                            console.log('Received message');
+                          })
+                        });
+                    </script>
+                    <ul id="messages"></ul>
+                    <input type="text" id="myMessage" class="form-control">
+                    <button id="sendbutton" type="submit" class="btn btn-info" style="margin: 5px">Send</button>
+{#                    <div class="row">#}
+{#                        <div class="col-md-2 col-lg-2 col-xl-2">#}
+{#                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">#}
+{#                        </div>#}
+{#                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <hr>#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-2 col-lg-2 col-xl-2">#}
+{#                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">#}
+{#                        </div>#}
+{#                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <hr>#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-2 col-lg-2 col-xl-2">#}
+{#                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">#}
+{#                        </div>#}
+{#                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <hr>#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-2 col-lg-2 col-xl-2">#}
+{#                            <img src="{{url_for('static',filename='images/brands/avater.png')}}" alt="" style="height: 30px;width: 30px;margin-top: 30px">#}
+{#                        </div>#}
+{#                        <div class="col-md-8 col-lg-8 col-xl-8 review" style="margin-top: 20px">#}
+{#                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, vel.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <hr>#}
 
                 </div>
             </div>

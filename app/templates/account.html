@@ -2,47 +2,112 @@
 {% block title %}{{ title }}{% endblock title %}
 {% block body %}
 <section id="section-account">
-    <div class="container">
-        <form action="account_handler.php" method="post" enctype="multipart/form-data">
+    <div class="container" style="margin-top: 10px">
+        <form action="{{url_for('index')}}" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col-md-4 col-lg-4 col-xl-4">
+                  <div class="col-2">
+                      <div class="">
+                           <h1 class="card-title">{{ user.username }}</h1>
+                      </div>
                     <div class="card">
-                        <img src="{{ url_for('static',filename='images/brands/avater.png') }}" alt="" class="img-fluid">
-                    </div>
-                    <div class="card" style="margin-top: 10px">
                        <div class="card-body">
-                           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit
-                               . Impedit, incidunt minus nobis obcaecati veniam vero.
-                           </p>
-                           <button class="btn btn-info btn-block" name="btn_update">Update</button>
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                              <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Orders</a>
+                              <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+{#                              <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>#}
+{#                              <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>#}
+                            </div>
                        </div>
                     </div>
-                </div>
-                <div class="col-md-8 col-lg-8 col-xl-8">
+                  </div>
+                  <div class="col-8">
+                    <div class="tab-content" id="v-pills-tabContent">
+                      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                         <div class="card">
+                             <h3 class="card-title" style="padding: 5px ;text-align: center">My Order list</h3>
+                             <div class="card-body">
+                                 <table class="table table-striped table-bordered">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">No</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col">Qty</th>
+                                      <th scope="col">Order Place</th>
+                                      <th scope="col">Order Date</th>
+                                      <th scope="col">Delivery Date</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">1</th>
+                                      <td>{{user.username}}</td>
+                                      <td>4</td>
+                                      <td>Nairobi CBD</td>
+                                      <td>Date</td>
+                                      <td>Date</td>
+                                    </tr>
+                                   <tr>
+                                      <th scope="row">1</th>
+                                        <td>{{user.username}}</td>
+                                      <td>4</td>
+                                      <td>Nairobi CBD</td>
+                                      <td>Date</td>
+                                      <td>Date</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">1</th>
+                                        <td>{{user.username}}</td>
+                                      <td>4</td>
+                                      <td>Nairobi CBD</td>
+                                      <td>Date</td>
+                                      <td>Date</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                             </div>
+                         </div>
+                      </div>
+                      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+                          <div class="card">
+                            <div class="card-body">
+                                <fieldset>
+                                    <h3>Hi {{ user.username }}</h3>
+                                    <div class="form-group">
+                                        <label for="">Username</label>
+                                        <input type="text" name="username" value="{{ user.username }}" class="form-control">
+                                        <input type="number" name="id" hidden value="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Email</label>
+                                        <input type="email" name="email" value="{{ user.email }}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Phone </label>
+                                        <input type="number" value="{{ user.phone }}" class="form-control">
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="">Phone </label>
+                                        <input type="text" value="{{ user.phone }}" class="form-control">
+                                    </div>
+                                    <button class="btn btn-info">Update</button>
+                                     <input type="file">
+                                </fieldset>
+                            </div>
+                    </div>
+                      </div>
+                      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+                      <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab"></div>
+                    </div>
+                  </div>
+                <div class="col-2">
                     <div class="card">
                         <div class="card-body">
-                            <fieldset>
-                                <h3>Hi {{ user.username }}</h3>
-                                <div class="form-group">
-                                    <label for="">Username</label>
-                                    <input type="text" name="username" value="{{ user.username }}" class="form-control">
-                                    <input type="number" name="id" hidden value="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Email</label>
-                                    <input type="text" name="email" value="{{ user.email }}" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Bio</label>
-                                    <textarea name="bio" class="form-control" >
-
-                                    </textarea>
-                                </div>
-                            </fieldset>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus asperiores aspernatur </p>
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
         </form>
     </div>
 </section>
