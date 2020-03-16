@@ -18,7 +18,6 @@ def admin():
 @app.route('/')
 @app.route('/home')
 def index():
-
     form = LoginForm()
     products = Product.query.all()[:6]
     try:
@@ -28,7 +27,6 @@ def index():
     except KeyError:
         form = LoginForm()
         return render_template('index.html', title='La Angel Collections| Home', form=form, products=products)
-
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -136,7 +134,6 @@ def delete(product_id):
         return render_template('dashboard.html', user=session['user_id'],title='La Angel Collections| Dashboard')
 
 
-
 @app.route('/shopping-cart')
 def shopping_cart():
     try:
@@ -159,7 +156,7 @@ def remove(cart_id):
     return redirect(url_for('shopping_cart'))
 
 
-@app.route('/checkout')
+@app.route('/checkout', methods=['POST','GET'])
 @login_required
 def checkout():
     try:
@@ -169,7 +166,7 @@ def checkout():
         cart_count =len(carts)
         for cart in carts:
             total += cart.price
-        order = Order(user_id=session['user_id'],amount=total,qty=cart_count, username=user.username)
+        order = Order(user_id=session['user_id'],amount=total,qty=cart_count, username=user.username, location=request.form['location'],phone=request.form['phone'])
         db.session.add(order)
         db.session.commit()
 
@@ -186,7 +183,6 @@ def order():
         order = Order.query.filter_by(user_id=session['user_id']).first()
         carts = Cart.query.filter_by(user_id=session['user_id']).all()
         order_carts = carts.copy()
-        print(order.amount)
         user = User.query.get(session['user_id'])
         db.session.add(order)
         db.session.commit()
@@ -206,9 +202,22 @@ def order():
 def account(username):
     try:
         user = User.query.filter_by(username=username).first()
-        return render_template('account.html', user=user,title='La Angel Collections| {}'.format(user.username))
+        orders = Order.query.filter_by(user_id=user.id)
+        return render_template('account.html', user=user,orders=orders,title='La Angel Collections| {}'.format(user.username))
     except:
         return render_template('index.html',title='La Angel Collections| Home')
+
+@app.route('/account/edit/<username>', methods=['POST','GET'])
+@login_required
+def edit_account(username):
+    user = User.query.filter_by(username=username).first()
+    if request.method == 'POST':
+        user.username = request.form['username']
+        user.email = request.form['email']
+        user.phone = request.form['phone']
+        db.session.commit()
+        return redirect(url_for('account', username=user.username))
+
 
 
 

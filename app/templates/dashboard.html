@@ -75,9 +75,12 @@
                         <thead>
                             <tr>
                               <th scope="col">ID</th>
-{#                              <th scope="col">Name</th>#}
-                              <th scope="col">Qty</th>
                               <th scope="col">Client</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Qty</th>
+                              <th scope="col">Order location</th>
+                              <th scope="col">Order date</th>
+                              <th scope="col">Delivered</th>
 {#                              <th scope="col">Order Place</th>#}
 {#                              <th scope="col">Order Date</th>#}
 {#                              <th scope="col">Delivery Date</th>#}
@@ -88,9 +91,12 @@
                                 {% for order in orders %}
                                     <tr>
                                       <th scope="row">{{ order.id }}</th>
-                                      <th scope="row">{{ order.title }}</th>
+                                      <th scope="row">{{ order.username }}</th>
+                                      <td>{{order.amount}}</td>
                                       <td>{{order.qty}}</td>
-                                      <td>{{order.username}}</td>
+                                      <td>{{order.location}}</td>
+                                      <td>{{ (order.timestamp).strftime("%W") }},{{ (order.timestamp).strftime("%B") }},{{ (order.timestamp).strftime("%Y") }}</td>
+                                      <td>YES</td>
                                     </tr>
                                 {% endfor %}
                             {% else %}

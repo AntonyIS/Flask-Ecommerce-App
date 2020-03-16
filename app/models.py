@@ -52,7 +52,6 @@ class Review(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
-
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -67,8 +66,11 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     username = db.Column(db.String(64), index=True)
     amount = db.Column(db.Integer)
-    # date
     qty = db.Column(db.Integer, index=True)
+    location = db.Column(db.String(64), index=True)
+    phone = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
 
 
 
