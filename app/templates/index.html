@@ -38,7 +38,7 @@
                                       <div class="card" id="card-inner">
                                             <img src="{{product.image}}" alt="" class="img-fluid" style="height: 150px;width: 100%">
                                             <div class="card-body" style="text-align: center">
-                                                <p class="">{{ product.title }} </p>
+                                                <p class="">{{ product.product_name }} </p>
                                                 Ksh:{{product.price}}
                                                 <a href="{{ url_for('add_to_cart', product_id=product.id) }}">
                                                     <span><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>

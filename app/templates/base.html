@@ -54,9 +54,7 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
                 </li>
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="#">Phones</a>#}
-{#                </li>#}
+
                 <li class="nav-item">
                     <a class="nav-link" href="#">Bags</a>
                 </li>
@@ -66,23 +64,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Dresses</a>
                 </li>
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="#">Electronics</a>#}
-{#                </li>#}
-                {% if session['admin']== True %}
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Electronics</a>
+                   </li>
+                {% if session['admin'] %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
+                {% else%}
+
                 {% endif%}
 
             </ul>
         {% if current_user.is_authenticated %}
           <ul class="navbar-nav ml-auto">
                <li class="nav-item" style="margin-right: 10px">
-                    <a class="nav-link" href="{{ url_for('account',username=user.username) }}">
+                    {% if session['admin'] %}
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            {{user.username}}(ADMIN)
+                        </a>
+                    {% else %}
+                        <a class="nav-link" href="{{ url_for('account',username=user.username) }}">
                         <i class="fa fa-user-o" aria-hidden="true"></i>
                         {{user.username}}
                     </a>
+                    {% endif %}
                </li>
           {% if cart_count %}
                    <a href="{{ url_for('shopping_cart')  }}" class=" bg-warning" style="padding: 5px;margin: 5px"> <span><i class="fa fa-shopping-cart bg-warning" aria-hidden="true"></i></span><span class="badge badge-warning" style="margin:3px ; ">{{ cart_count }}</span></a>

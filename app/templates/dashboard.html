@@ -3,117 +3,237 @@
 
 {% block body %}
     <section id="section-dashboard">
-        <div class="section-add-product container" >
+    <div class="container-fluid">
+        <div id="dashboard">
             <div class="row">
-                <div class="col-md-8 col-lg-8 col-xl-8" style="height: 40vh">
-                   <div class="row">
-                       {% if products %}
-                           {% for product in products %}
-                               <div class="col-md-3 col-lg-3 col-xl-3">
-                                    <div class="card" id="card-inner">
-                                        <img src="{{product.image}}" alt="" style="height: 150px">
-                                        <div class="card-body">
-                                            <p class="">{{ product.title }}</p>
-                                            <span>Ksh:{{product.price}}</span>
-                                            <a href="{{ url_for('delete', product_id=product.id) }}" class="btn btn-danger btn-block">Delete</a>
-
-                                        </div>
-                                    </div>
-                               </div>
-                            {% endfor %}
-                       {% else %}
-                           <p>No Products</p>
-                       {% endif  %}
-                   </div>
-
-                </div>
-                <div class="col-md-4 col-lg-4 col-xl-4 ">
-                    <div class="card">
-                        <form action="{{ url_for('dashboard') }}" method="post" enctype="multipart/form-data">
-                            <fieldset>
-                                {{ form.hidden_tag() }}
-                                  <h4 style="text-align: center">Add Product</h4>
-                                          <hr>
-                                <div class="form-group">
-                                        <label for="">{{ form.title.label }}</label>
-                                        {{ form.title(size=32, placeholder="Product title", class="form-control",type="text") }}
-                                        {% for error in form.title.errors %}
-                                        <span style="color: red;">[{{ error }}]</span>
-                                        {% endfor %}
-                                  </div>
-                                <div class="form-group">
-                                        <label for="">{{ form.price.label }}</label>
-                                        {{ form.price(size=32, placeholder="Product price", class="form-control",type="text") }}
-                                        {% for error in form.price.errors %}
-                                        <span style="color: red;">[{{ error }}]</span>
-                                        {% endfor %}
-                                  </div>
-                                  <div class="form-group">
-                                        <label for="">{{ form.size.label }}</label>
-                                        {{ form.size(size=32, placeholder="Size of product", class="form-control",type="number") }}
-                                        {% for error in form.size.errors %}
-                                        <span style="color: red;">[{{ error }}]</span>
-                                        {% endfor %}
-                                  </div>
-
-                                    <div class="form-group">
-                                        <label for="">{{ form.category.label }}</label>
-                                        {{ form.category(size=32, placeholder="Category", class="form-control",type="text") }}
-                                        {% for error in form.category.errors %}
-                                        <span style="color: red;">[{{ error }}]</span>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="">
-
-                                        {{ form.image(size=32,type="file",id="") }}
-                                        {% for error in form.image.errors %}
-                                        <span style="color: red;">[{{ error }}]</span>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="">{{ form.description.label }}</label>
-                                        {{ form.description(size=32, placeholder="Description", class="form-control",type="textarea",id="") }}
-                                        {% for error in form.description.errors %}
-                                        <span style="color: red;">[{{ error }}]</span>
-                                        {% endfor %}
-                                    </div>
-
-                                  <button type="submit" class="btn btn-primary btn-block">Add Product</button>
-                            </fieldset>
-                        </form>
+                <div class="col-3">
+                  <div class="card">
+                        <div class="card-body">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active " id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Dashboard</a>
+                                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Add Product</a>
+                                {#                              <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">All Products</a>#}
+                                {#                              <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>#}
+                                <form action="" role="search">
+                                  <input type="text" class="form-control" placeholder="Search">
+                                  <button class="btn btn-danger btn-block" style="margin-top: 3px">Search</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-lg-12 col-xl-12">
-                <div class="card">
-                     <div class="row">
-                           {% if orders %}
-                               {% for order in orders %}
-                                   <div class="col-md-3 col-lg-3 col-xl-3">
-                                        <div class="card" id="card-inner">
-                                            <div class="card-body">
-                                                <span class="">Customer: {{ order.userame}}</span> <br>
-                                                <span class="">Amount: Ksh {{ order.amount}}</span> <br>
-                                                <span class="">Quantity: {{ order.qty}}</span> <br>
-                                                <span class="">Location: Nairobi CBD</span>
-                                                 <a href="" class="btn btn-success btn-block">Confirm</a>
-                                            </div>
+                  </div>
+                <div class="col-9">
+                    <div class="card">
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-md-4 col-lg-4 col-xl-4">
+                                      <div class="card">
+                                          <div class="card-body">
+                                          <h3>All Products</h3>
+                                              <div class="card-footer">
+                                                  <p class="card-text">
+                                                      View Details
+                                                  </p>
+                                                </div>
                                         </div>
-                                   </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4 col-lg-4 col-xl-4">
+                                      <div class="card">
+                                          <div class="card-body">
+                                            <h3>All users</h3>
+                                                <div class="card-footer">
+                                                  <p class="card-text">
+                                                      View Details
+                                                  </p>
+                                                </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4 col-lg-4 col-xl-4">
+                                      <div class="card">
+                                          <div class="card-body">
+                                          <h3>All Orders</h3>
+                                              <div class="card-footer">
+                                                  <p class="card-text">
+                                                      View Details
+                                                  </p>
+                                                </div>
+                                            </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                <div class="tab-content" id="v-pills-tabContent"></div>
+              </div>
+            </div>
+            <div class="row" style="margin-bottom: 20px">
+                <div class="col-12">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                              <th scope="col">ID</th>
+{#                              <th scope="col">Name</th>#}
+                              <th scope="col">Qty</th>
+                              <th scope="col">Client</th>
+{#                              <th scope="col">Order Place</th>#}
+{#                              <th scope="col">Order Date</th>#}
+{#                              <th scope="col">Delivery Date</th>#}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if orders %}
+                                {% for order in orders %}
+                                    <tr>
+                                      <th scope="row">{{ order.id }}</th>
+                                      <th scope="row">{{ order.title }}</th>
+                                      <td>{{order.qty}}</td>
+                                      <td>{{order.username}}</td>
+                                    </tr>
                                 {% endfor %}
-                           {% else %}
-                               <p>No Products</p>
-                           {% endif  %}
-                       </div>
+                            {% else %}
+                                <h3>No Orders</h3>
+                            {% endif  %}
+
+                          </tbody>
+                    </table>
+                        <div class="section-add-product container-fluid" >
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4 col-xl-4">
+                                        <div class="card">
+                                    <form action="{{ url_for('dashboard') }}" method="post" enctype="multipart/form-data">
+                                        <fieldset>
+                                            {{ form.hidden_tag() }}
+                                              <h4 style="text-align: center">Add Product</h4>
+                                                      <hr>
+                                            <div class="form-group">
+                                                    <label for="">{{ form.product_name.label }}</label>
+                                                    {{ form.product_name(size=32, placeholder="Product name", class="form-control",type="text") }}
+                                                    {% for error in form.product_name.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                              </div>
+                                            <div class="form-group">
+                                                    <label for="">{{ form.price.label }}</label>
+                                                    {{ form.price(size=32, placeholder="Product price", class="form-control",type="text") }}
+                                                    {% for error in form.price.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                              </div>
+                                              <div class="form-group">
+                                                    <label for="">{{ form.size.label }}</label>
+{#                                                    {{ form.size(size=32, placeholder="Size of product", class="form-control",type="number") }}#}
+                                                    <select id="size" name="size">
+                                                      <option value="s" >S</option>
+                                                      <option value="m" >M</option>
+                                                      <option value="l" >L</option>
+                                                      <option value="xl" >XL</option>
+                                                      <option value="xxl" >XXL</option>
+                                                    </select>
+                                                    {% for error in form.size.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                              </div>
+                                            <div class="form-group">
+                                                    <label for="">{{ form.size_number.label }}</label>
+                                                    {{ form.size_number(size=32, placeholder="Size number", class="form-control",type="number") }}
+                                                    {% for error in form.size_number.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                              </div>
+
+                                                <div class="form-group">
+                                                    <label for="">{{ form.category.label }}</label>
+{#                                                    {{ form.category(size=32, placeholder="Category", class="form-control",type="text") }}#}
+                                                    <select id="category" name="category">
+                                                      <option value="men" >Men</option>
+                                                      <option value="women" >Women</option>
+                                                      <option value="kids"  >Kids</option>
+                                                    </select>
+                                                    {% for error in form.category.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">{{ form.item.label }}</label>
+                                                    {{ form.item(size=32, placeholder="Item", class="form-control",type="text") }}
+                                                    {% for error in form.item.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                              </div>
+                                                <div class="form-group">
+                                                    <label for="">{{ form.sku.label }}</label>
+                                                    {{ form.sku(size=32, placeholder="SKU", class="form-control",type="text") }}
+                                                    {% for error in form.sku.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="">
+                                                    {{ form.image(size=32,type="file",id="") }}
+                                                    {% for error in form.image.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">{{ form.description.label }}</label>
+                                                    {{ form.description(size=32, placeholder="Description", class="form-control",type="textarea",id="") }}
+                                                    {% for error in form.description.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                              <button type="submit" class="btn btn-primary btn-block">Add Product</button>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                </div>
+                                <div class="col-md-8 col-lg-8 col-xl-8" style="height: 40vh">
+                                   {% if products %}
+                                       <h3>Products</h3>
+                                         <table class="table table-striped table-bordered">
+                                              <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Sku</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Category</th>
+                                                    <th scope="col">Item</th>
+                                                    <th scope="col">Size</th>
+                                                    <th scope="col">Size number</th>
+                                                    <th scope="col">Time posted</th>
+                                                    <th scope="col">Admin</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                              {% for product in products %}
+                                                <tr style="">
+                                                    <td>{{product.id}}</td>
+                                                    <td>{{product.sku}}</td>
+                                                    <td>{{ product.product_name }}</td>
+                                                    <td>{{ product.price }}</td>
+                                                    <td>{{ product.category }}</td>
+                                                    <td>{{ product.item }}</td>
+                                                    <td>{{ product.size }}</td>
+                                                    <td>{{ product.size_number }}</td>
+                                                    <td>{{ (product.timestamp).strftime("%W") }},{{ (product.timestamp).strftime("%B") }},{{ (product.timestamp).strftime("%Y") }}</td>
+                                                    <td>{{ product.user_id }}</td>
+
+                                                </tr>
+                                              {% endfor %}
+                                              </tbody>
+                                            </table>
+                                   {% else %}
+                                       <p>No Products</p>
+                                   {% endif  %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
                 </div>
             </div>
-            <div class="col-md-8 col-lg-8 col-xl-8">
-
-            </div>
         </div>
-    </div>
     </section>
 {% endblock body %}

@@ -9,6 +9,10 @@ from app.models import User,Product,Cart,Order
 from app import db, socketio, send
 from config import Config
 
+@login_required
+@app.route('/admin')
+def admin():
+    return render_template("dashboard.html")
 
 
 @app.route('/')
@@ -38,7 +42,7 @@ def login():
             flash('Invalid username or password', "alert alert-danger")
             return redirect(url_for('login'))
 
-        if user.email =='a@gmail.com':
+        if user.email in Config.ADMINS:
             session['admin'] = True
             session['user_id'] = user.id
 
@@ -64,7 +68,7 @@ def signup():
         return redirect(url_for('login'))
     return render_template('signup.html', title='La Angel Collections| Signup', form=form)
 
-
+@login_required
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
     if session['admin'] == True :
@@ -72,17 +76,20 @@ def dashboard():
         orders = Order.query.all()
         form = ProductForm()
         if request.method == 'POST':
+            category = request.form['category']
+            size = request.form['size']
             if request.files['image']:
                 f = request.files['image']
                 filename = secure_filename(f.filename)
                 image_file = "static/images/products/"+ filename
                 f.save(Config.UPLOAD_FOLDER + filename)
-                product = Product(title=form.title.data,price=form.price.data, description=form.description.data,size=form.size.data,category=form.category.data,image=image_file)
+
+                product = Product(product_name=form.product_name.data,price=form.price.data, description=form.description.data,sku=form.sku.data, size=size,size_number=form.size_number.data,category=category,item = form.item.data,image=image_file,user_id=session['user_id'])
                 db.session.add(product)
                 db.session.commit()
                 flash('Congratulations')
                 return redirect(url_for('dashboard'))
-            product = Product(title=form.title.data, price=form.price.data, description=form.description.data,size=form.size.data, category=form.category.data)
+            product = Product(product_name=form.product_name.data, price=form.price.data, description=form.description.data,sku=form.sku.data,size=form.size.data, size_number=form.size_number.data,category=category,item = form.item.data ,user_id=session['user_id'])
             db.session.add(product)
             db.session.commit()
             flash('Congratulations')
@@ -100,18 +107,18 @@ def product_details(product_id):
         product = Product.query.get(product_id)
         form = LoginForm()
         user = User.query.get(session['user_id'])
-        return render_template('product_detail.html', product=product, form=form, user=user,title='La Angel Collections| {}'.format(product.title))
+        return render_template('product_detail.html', product=product, form=form, user=user,title='La Angel Collections| {}'.format(product.product_name))
     except:
         product = Product.query.get(product_id)
         form = LoginForm()
-        return render_template('product_detail.html', product=product, form=form, title='La Angel Collections| {}'.format(product.title))
+        return render_template('product_detail.html', product=product, form=form, title='La Angel Collections| {}'.format(product.product_name))
 
 
 @app.route('/add/<int:product_id>')
 @login_required
 def add_to_cart(product_id):
     product = Product.query.get(product_id)
-    cart = Cart(product_id=product_id, user_id=session['user_id'], title=product.title, price=product.price,image=product.image)
+    cart = Cart(product_id=product_id, user_id=session['user_id'], title=product.product_name, price=product.price,image=product.image)
     db.session.add(cart)
     db.session.commit()
     return redirect(url_for('index'))
@@ -162,7 +169,7 @@ def checkout():
         cart_count =len(carts)
         for cart in carts:
             total += cart.price
-        order = Order(user_id=session['user_id'],amount=total,qty=cart_count, userame=user.username)
+        order = Order(user_id=session['user_id'],amount=total,qty=cart_count, username=user.username)
         db.session.add(order)
         db.session.commit()
 

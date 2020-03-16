@@ -8,6 +8,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = basedir + "/app/static/images/products/"
+    ADMINS = ["admin@gmail.com"]
 
 
     # SESSION_TYPE = environ.get('SESSION_TYPE')

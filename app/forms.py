@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, TextAreaField, FileField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, TextAreaField, FileField, SelectField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
@@ -31,11 +31,15 @@ class RegistrationForm(FlaskForm):
 
 
 class ProductForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    size = IntegerField('Size', validators=[DataRequired()])
+    product_name = StringField('Product name', validators=[DataRequired()])
     price = IntegerField('Price', validators=[DataRequired()])
-    category = StringField('Category', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
-    image = FileField()
+    category = SelectField(u'Category',choices=[("Women","women"),("Men","men"),("Kids","kids")])
+    item = StringField('Item', validators=[DataRequired()])
+    sku = StringField('SKU', validators=[DataRequired()])
+    size = IntegerField('Size', validators=[DataRequired()])
+    size_number = IntegerField('Size number', validators=[DataRequired()])
+    reviews = IntegerField('Size', validators=[DataRequired()])
+    image = FileField("Product Image")
     user_id = StringField('user_id', validators=[DataRequired()])
     submit = SubmitField('Add Product')

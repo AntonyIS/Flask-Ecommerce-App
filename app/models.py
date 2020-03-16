@@ -28,15 +28,18 @@ class User(UserMixin, db.Model):
 
 
 class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(64), index=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    product_name = db.Column(db.String(64), index=True)
     price = db.Column(db.Integer, index=True)
-    description = db.Column(db.String(200))
-    image = db.Column(db.String(64), index=True, unique=False)
+    description = db.Column(db.String(300))
+    category = db.Column(db.String(20))
+    item = db.Column(db.String(200))
+    sku = db.Column(db.String(200))
     size = db.Column(db.Integer, index=True, unique=False)
+    size_number = db.Column(db.Integer, index=True, unique=False)
     reviews = db.Column(db.String(64), index=True, unique=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    category = db.Column(db.String(64), index=True)
+    image = db.Column(db.String(64), index=True, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
@@ -62,7 +65,7 @@ class Cart(db.Model):
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    userame = db.Column(db.String(64), index=True)
+    username = db.Column(db.String(64), index=True)
     amount = db.Column(db.Integer)
     # date
     qty = db.Column(db.Integer, index=True)
